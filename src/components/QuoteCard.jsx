@@ -1,9 +1,5 @@
 const QuoteCard = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  return <div></div>;
+};
 
-export default QuoteCard
+export default QuoteCard;

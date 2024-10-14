@@ -4,10 +4,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        primary: ['Klik', 'sans-serif']
+        primary: ['Klik', 'sans-serif'],
       },
     },
   },
   plugins: [],
-}
-
+};

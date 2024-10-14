@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@font-face {
+  font-family: 'Klik';
+  src: url('assets/fonts/klik/Klik-Light.otf') format('opentype');
+}
+
+html {
+  scroll-behavior: smooth;
+  @apply font-primary font-normal;
+}

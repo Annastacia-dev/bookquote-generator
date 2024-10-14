@@ -74,7 +74,7 @@ const Input = () => {
             alt="Book Cover"
             className="w-32 h-60 object-cover rounded mb-4"
           />
-          <p className=" italic">&quot;{quote}&quote;</p>
+          <p className=" italic">&quot;{quote}&quot;</p>
           <div className='absolute bottom-3 right-5 flex  gap-1 font-bold'>
             <p>{book.title}</p>,
             <p>{book.authors}</p>

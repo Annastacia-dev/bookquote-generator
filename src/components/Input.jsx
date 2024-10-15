@@ -9,7 +9,7 @@ const Input = () => {
   const [showCard, setShowCard] = useState(true); // Always show the card
   
   // Placeholder values
-  const placeholderQuote = "Who has never killed an hour? Not casually or without thought but carefully...";
+  const placeholderQuote = "Who has never killed an hour? Not casually or without thought but carefully: a premeditated murder of minutes. The violence comes from a combination of giving up, not caring, and a resignation that getting past it is all you can hope to accomplish. So you kill the hour. You do not work, you do not read, you do not daydream. If you sleep it is not because you need to sleep. And when at last it is over, there is no evidence: no weapon, no blood, and no body";
   const placeholderBookTitle = "House of Leaves";
   const placeholderBookAuthor = "Mark Z. Danielewski";
   const placeholderBookCover = bookTitle? 'notfound.png': "houseofleaves.jpg";

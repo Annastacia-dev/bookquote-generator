@@ -6,6 +6,9 @@ export default {
       fontFamily: {
         primary: ['Klik', 'sans-serif'],
       },
+      colors: {
+        primary: '#A1F0E7'
+      }
     },
   },
   plugins: [],

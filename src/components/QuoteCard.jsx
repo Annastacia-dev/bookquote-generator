@@ -1,5 +1,6 @@
 import { useContext, useRef } from 'react';
 import { QuoteContext } from '../context/Quote';
+import { QuoteCardContext } from '../context/QuoteCard';
 import html2canvas from 'html2canvas';
 import { FiDownload } from 'react-icons/fi';
 import {saveAs} from 'file-saver';
@@ -15,6 +16,8 @@ const QuoteCard = () => {
     placeholderBookAuthor,
     showCard,
   } = useContext(QuoteContext);
+
+  const { backgroundColor } = useContext(QuoteCardContext)
 
   const quoteCardRef = useRef(null);
 
@@ -38,7 +41,7 @@ const QuoteCard = () => {
     <div className="relative">
       <div
         id='quote-card'
-        className="bg-white text-sm text-black p-4 rounded shadow-md max-w-xl flex items-center gap-10 relative"
+        className={`${backgroundColor} text-sm p-4 rounded shadow-md max-w-xl flex items-center gap-10 relative`}
         ref={quoteCardRef}
       >
         <img

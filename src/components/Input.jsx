@@ -1,19 +1,10 @@
 import { useContext } from 'react';
 import { QuoteContext } from '../context/Quote';
-import QuoteCard from './QuoteCard';
+
 
 const Input = () => {
-  const {
-    setBook,
-    setBookCover,
-    bookAuthor,
-    bookTitle,
-    setShowCard,
-    quote,
-    setQuote,
-    setBookTitle,
-    setBookAuthor,
-  } = useContext(QuoteContext);
+
+  const { setBook, setBookCover, bookAuthor, bookTitle, setShowCard, quote, setQuote, setBookTitle, setBookAuthor } = useContext(QuoteContext);
 
   const fetchBookCover = async (title, author) => {
     try {
@@ -42,13 +33,13 @@ const Input = () => {
     setShowCard(true);
 
     // Fetch book cover and details only if both title and author are provided
-    if (bookTitle) {
+    if (bookTitle ) {
       await fetchBookCover(bookTitle, bookAuthor);
     }
   };
 
   return (
-    <div className="grid md:grid-cols-2 gap-5">
+  
       <form className="flex flex-col gap-4" onSubmit={handleGenerate}>
         <textarea
           className="bg-white/20 md:w-[40vw] h-40 rounded px-4 py-2 border border-white/10"
@@ -59,7 +50,7 @@ const Input = () => {
           maxLength={1000}
           required
         />
-        <div className="flex gap-1">
+        <div className='flex gap-1'>
           <input
             className="bg-white/20 md:w-[20vw] w-full rounded px-4 py-2 border border-white/10"
             placeholder="Book title"
@@ -81,9 +72,6 @@ const Input = () => {
           Generate
         </button>
       </form>
-
-      <QuoteCard />
-    </div>
   );
 };
 

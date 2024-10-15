@@ -3,6 +3,7 @@ import { useState, createContext } from 'react';
 
 const QuoteContext = createContext();
 
+// eslint-disable-next-line react/prop-types
 const QuoteProvider = ({ children }) => {
   const [quote, setQuote] = useState('');
   const [bookTitle, setBookTitle] = useState('');

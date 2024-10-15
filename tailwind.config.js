@@ -7,8 +7,8 @@ export default {
         primary: ['Klik', 'sans-serif'],
       },
       colors: {
-        primary: '#A1F0E7'
-      }
+        primary: '#A1F0E7',
+      },
     },
   },
   plugins: [],

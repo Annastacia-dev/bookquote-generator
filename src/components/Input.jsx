@@ -1,20 +1,20 @@
-import { useState } from 'react';
+import { useContext } from 'react';
+import { QuoteContext } from '../context/Quote';
+import QuoteCard from './QuoteCard';
 
 const Input = () => {
-  const [quote, setQuote] = useState('');
-  const [bookTitle, setBookTitle] = useState('');
-  const [bookAuthor, setBookAuthor] = useState('');
-  const [bookCover, setBookCover] = useState('');
-  const [book, setBook] = useState(null);
-  const [showCard, setShowCard] = useState(true); // Always show the card
-  
-  // Placeholder values
-  const placeholderQuote = "Who has never killed an hour? Not casually or without thought but carefully: a premeditated murder of minutes. The violence comes from a combination of giving up, not caring, and a resignation that getting past it is all you can hope to accomplish. So you kill the hour. You do not work, you do not read, you do not daydream. If you sleep it is not because you need to sleep. And when at last it is over, there is no evidence: no weapon, no blood, and no body";
-  const placeholderBookTitle = "House of Leaves";
-  const placeholderBookAuthor = "Mark Z. Danielewski";
-  const placeholderBookCover = bookTitle? 'notfound.png': "houseofleaves.jpg";
+  const {
+    setBook,
+    setBookCover,
+    bookAuthor,
+    bookTitle,
+    setShowCard,
+    quote,
+    setQuote,
+    setBookTitle,
+    setBookAuthor,
+  } = useContext(QuoteContext);
 
-  // Function to fetch book cover from Google Books API
   const fetchBookCover = async (title, author) => {
     try {
       const response = await fetch(
@@ -37,17 +37,15 @@ const Input = () => {
 
   const handleGenerate = async (event) => {
     event.preventDefault(); // Prevent page refresh on form submission
-    
+
     // Always show the card (so the quote can update independently)
     setShowCard(true);
 
     // Fetch book cover and details only if both title and author are provided
-    if (bookTitle ) {
+    if (bookTitle) {
       await fetchBookCover(bookTitle, bookAuthor);
     }
   };
-
-  console.log(bookCover)
 
   return (
     <div className="grid md:grid-cols-2 gap-5">
@@ -61,7 +59,7 @@ const Input = () => {
           maxLength={1000}
           required
         />
-        <div className='flex gap-1'>
+        <div className="flex gap-1">
           <input
             className="bg-white/20 md:w-[20vw] w-full rounded px-4 py-2 border border-white/10"
             placeholder="Book title"
@@ -84,19 +82,7 @@ const Input = () => {
         </button>
       </form>
 
-      {/* Always show the quote card */}
-      <div className="quote-card bg-white text-sm text-black p-4 rounded shadow-md max-w-xl flex items-center gap-10 relative">
-        <img
-          src={bookCover || placeholderBookCover}
-          alt="Book Cover"
-          className="w-32 h-60 object-cover rounded mb-4"
-        />
-        <p className="italic">&quot;{quote || placeholderQuote}&quot;</p>
-        <div className="absolute bottom-3 right-5 flex gap-1 font-bold">
-          <p>{book?.title || placeholderBookTitle}</p>,
-          <p>{book?.authors ? book.authors.join(', ') : placeholderBookAuthor}</p>
-        </div>
-      </div>
+      <QuoteCard />
     </div>
   );
 };

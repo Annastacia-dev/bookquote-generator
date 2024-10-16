@@ -24,7 +24,7 @@ const QuoteCard = () => {
 
   const captureQuoteCardImage = async () => {
     const quoteElement = document.getElementById("quote-card");
-    const canvas = await html2canvas(quoteElement, { scale: 2 });
+    const canvas = await html2canvas(quoteElement, { scale: 1 });
     return new Promise((resolve) => {
       canvas.toBlob((blob) => {
         const file = new File([blob], "quote-card.png", { type: "image/png" });
@@ -41,16 +41,18 @@ const QuoteCard = () => {
     <div className="relative">
       <div
         id='quote-card'
-        className={`${backgroundColor} text-sm p-4 rounded shadow-md max-w-xl flex items-center gap-10 relative`}
+        className={`${backgroundColor} text-sm p-4 shadow-md max-w-xl max-h-xl flex flex-col items-center gap-5 relative`}
         ref={quoteCardRef}
       >
+        <div className='flex md:flex-row flex-col items-center md:gap-10 gap-5'>
         <img
           src={bookCover || placeholderBookCover}
           alt="Book Cover"
-          className="w-32 h-60 object-cover rounded mb-4"
+          className="md:w-36 w-28 object-cover rounded mb-4"
         />
         <p className="italic">&quot;{quote || placeholderQuote}&quot;</p>
-        <div className="absolute bottom-3 right-5 flex gap-1 font-bold">
+        </div>
+        <div className="flex gap-1 font-bold justify-end w-full text-right">
           <p>{book?.title || placeholderBookTitle}</p>,
           <p>
             {book?.authors ? book.authors.join(', ') : placeholderBookAuthor}

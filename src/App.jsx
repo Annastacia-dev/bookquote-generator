@@ -13,7 +13,7 @@ function App() {
         </h5>
       </div>
 
-      <div className="mt-4 grid md:grid-cols-2">
+      <div className="mt-4 grid md:grid-cols-2 md:gap-4 gap-20">
         <Input />
         <QuoteCard />
       </div>

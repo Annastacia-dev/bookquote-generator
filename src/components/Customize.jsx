@@ -13,24 +13,28 @@ const Customize = () => {
     fonts,
     setFont,
     setHoveredFont,
-    loadFont
+    loadFont,
+    fontBold,
+    setFontBold,
+    fontItalic,
+    setFontItalic,
   } = useContext(QuoteCardContext);
+
+  loadFont(font);
 
   return (
     <div className="py-3 lg:mt-12">
       <div className="flex items-center gap-2 text-primary">
         <FaWandMagicSparkles />
-        <h5 className="font-bold tracking-wider capitalize">
-          {' '}
-          customize card{' '}
-        </h5>
+        <h5 className="font-bold tracking-wider capitalize">customize card</h5>
       </div>
       <hr className="mt-1 mb-4" />
 
-      <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-4 mt-6">
+      <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-8 mt-6">
+        {/* Background */}
         <div className="flex flex-col gap-2 text-sm">
-          <h5 className="text-sm">Background Color</h5>
-          <div className="flex items-center gap-2">
+          <h5 className="text-sm capitalize">Background Color</h5>
+          <div className="flex items-center gap-2" style={{ fontFamily: font }}>
             {backgroundColors.map((color, index) => (
               <button
                 key={index}
@@ -49,8 +53,9 @@ const Customize = () => {
           </div>
         </div>
 
+        {/* Font */}
         <div className="flex flex-col gap-2 text-sm">
-          <h5 className="text-sm">Font</h5>
+          <h5 className="text-sm capitalize">Font</h5>
           <CustomDropdown
             options={fonts}
             selectedOption={font}
@@ -58,6 +63,25 @@ const Customize = () => {
             onHover={setHoveredFont}
             loadFont={loadFont}
           />
+        </div>
+
+        {/* Font Styles */}
+        <div className="flex flex-col gap-2 text-sm">
+          <h5 className="text-sm capitalize">font styles</h5>
+          <div className="flex items-center gap-2" style={{ fontFamily: font }}>
+            <button
+              className={`capitalize py-2 px-4 rounded ${backgroundColor}  ${fontBold && 'font-bold'}`}
+              onClick={() => setFontBold(!fontBold)}
+            >
+              a
+            </button>
+            <button
+              className={`capitalize py-2 px-4  rounded ${backgroundColor} ${fontItalic && 'italic'}`}
+              onClick={() => setFontItalic(!fontItalic)}
+            >
+              a
+            </button>
+          </div>
         </div>
       </div>
     </div>

@@ -17,7 +17,7 @@ const QuoteCard = () => {
     showCard,
   } = useContext(QuoteContext);
 
-  const { backgroundColor, hoveredFont, font, loadFont } =
+  const { backgroundColor, hoveredFont, font, loadFont, fontBold, fontItalic } =
     useContext(QuoteCardContext);
   loadFont(font);
 
@@ -68,7 +68,7 @@ const QuoteCard = () => {
               alt="Book Cover"
               className="md:w-36 w-28 object-cover rounded mb-4"
             />
-            <p className="">&quot;{quote || placeholderQuote}&quot;</p>
+            <p className={`text-xs ${fontBold && 'font-bold'} ${fontItalic && 'italic'}`}>&quot;{quote || placeholderQuote}&quot;</p>
           </div>
           <div className="flex gap-1 font-bold justify-end w-full text-right z-10">
             <p>{book?.title || placeholderBookTitle}</p>,

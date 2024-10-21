@@ -17,13 +17,15 @@ const QuoteCard = () => {
     showCard,
   } = useContext(QuoteContext);
 
-  const { backgroundColor } = useContext(QuoteCardContext);
+  const { backgroundColor, hoveredFont, font, loadFont } =
+    useContext(QuoteCardContext);
+  loadFont(font);
 
   const quoteCardRef = useRef(null);
 
   const captureQuoteCardImage = async () => {
     const quoteElement = document.getElementById('quote-card');
-    const canvas = await html2canvas(quoteElement, { scale: 1 });
+    const canvas = await html2canvas(quoteElement, { scale: 2 });
     return new Promise((resolve) => {
       canvas.toBlob((blob) => {
         const file = new File([blob], 'quote-card.png', { type: 'image/png' });
@@ -42,34 +44,38 @@ const QuoteCard = () => {
     <div className="relative">
       <div
         id="quote-card"
-        className={`${backgroundColor === 'image' ? 'relative' : backgroundColor} text-sm p-4 shadow-md max-w-xl max-h-xl flex flex-col items-center gap-5`}
+        className={`${backgroundColor === 'image' ? 'relative' : backgroundColor} text-sm  max-w-xl max-h-xl flex flex-col items-center gap-5`}
         ref={quoteCardRef}
-        style={
-          backgroundColor === 'image'
-            ? {
-                backgroundImage: `url(${bookCover || placeholderBookCover})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-              }
-            : {}
-        }
+        style={{
+          backgroundImage:
+            backgroundColor === 'image'
+              ? `url(${bookCover || placeholderBookCover})`
+              : 'none',
+          backgroundSize: backgroundColor === 'image' ? 'cover' : 'initial',
+          backgroundPosition:
+            backgroundColor === 'image' ? 'center' : 'initial',
+          fontFamily: hoveredFont || font,
+        }}
       >
-        {backgroundColor === 'image' && (
-          <div className="absolute inset-0 bg-black opacity-90"></div>
-        )}
-        <div className="flex md:flex-row flex-col items-center md:gap-10 gap-5 z-10">
-          <img
-            src={bookCover || placeholderBookCover}
-            alt="Book Cover"
-            className="md:w-36 w-28 object-cover rounded mb-4"
-          />
-          <p className="italic">&quot;{quote || placeholderQuote}&quot;</p>
-        </div>
-        <div className="flex gap-1 font-bold justify-end w-full text-right z-10">
-          <p>{book?.title || placeholderBookTitle}</p>,
-          <p>
-            {book?.authors ? book.authors.join(', ') : placeholderBookAuthor}
-          </p>
+        <div
+          className={`flex flex-col gap-2 p-4 ${backgroundColor === 'image' ? 'bg-black/90' : ''}`}
+        >
+          <div
+            className={`flex md:flex-row flex-col items-center md:gap-10 gap-5 z-10`}
+          >
+            <img
+              src={bookCover || placeholderBookCover}
+              alt="Book Cover"
+              className="md:w-36 w-28 object-cover rounded mb-4"
+            />
+            <p className="">&quot;{quote || placeholderQuote}&quot;</p>
+          </div>
+          <div className="flex gap-1 font-bold justify-end w-full text-right z-10">
+            <p>{book?.title || placeholderBookTitle}</p>,
+            <p>
+              {book?.authors ? book.authors.join(', ') : placeholderBookAuthor}
+            </p>
+          </div>
         </div>
       </div>
       {showCard && (

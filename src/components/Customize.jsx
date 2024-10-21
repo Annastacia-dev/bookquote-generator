@@ -18,6 +18,8 @@ const Customize = () => {
     setFontBold,
     fontItalic,
     setFontItalic,
+    showBookCover,
+    setShowBookCover,
   } = useContext(QuoteCardContext);
 
   loadFont(font);
@@ -81,6 +83,19 @@ const Customize = () => {
             >
               a
             </button>
+          </div>
+        </div>
+
+        {/* Book Cover */}
+        <div className="flex items-center mb-4">
+          <label className="mr-2 text-sm">Show Book Cover:</label>
+          <div
+            className={`relative inline-flex items-center cursor-pointer ${showBookCover ? 'bg-primary' : 'bg-gray-400'} rounded-full w-12 h-6`}
+            onClick={() => setShowBookCover(!showBookCover)}
+          >
+            <span
+              className={`absolute left-0 w-6 h-6 bg-white rounded-full transition-transform duration-200 ${showBookCover ? 'transform translate-x-6' : ''}`}
+            ></span>
           </div>
         </div>
       </div>

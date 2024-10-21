@@ -37,7 +37,7 @@ const CustomDropdown = ({
   return (
     <div className="relative" ref={dropdownRef}>
       <button
-        className="border border-white/10 p-2 rounded bg-[#28292E] w-full text-left flex items-center justify-between"
+        className="border border-white/10 p-2 rounded bg-[#28292E] md:min-w-48 text-left flex items-center justify-between"
         onClick={toggleDropdown}
         style={{ fontFamily: selectedOption }} // Apply selected font immediately
       >

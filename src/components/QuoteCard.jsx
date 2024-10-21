@@ -17,8 +17,15 @@ const QuoteCard = () => {
     showCard,
   } = useContext(QuoteContext);
 
-  const { backgroundColor, hoveredFont, font, loadFont, fontBold, fontItalic } =
-    useContext(QuoteCardContext);
+  const {
+    backgroundColor,
+    hoveredFont,
+    font,
+    loadFont,
+    fontBold,
+    fontItalic,
+    showBookCover,
+  } = useContext(QuoteCardContext);
   loadFont(font);
 
   const quoteCardRef = useRef(null);
@@ -44,7 +51,7 @@ const QuoteCard = () => {
     <div className="relative">
       <div
         id="quote-card"
-        className={`${backgroundColor === 'image' ? 'relative' : backgroundColor} text-sm  max-w-xl max-h-xl flex flex-col items-center gap-5`}
+        className={`${backgroundColor === 'image' ? 'relative' : backgroundColor} text-sm  max-w-xl min-h-60 flex flex-col items-center justify-center  gap-5`}
         ref={quoteCardRef}
         style={{
           backgroundImage:
@@ -58,19 +65,25 @@ const QuoteCard = () => {
         }}
       >
         <div
-          className={`flex flex-col gap-2 p-4 ${backgroundColor === 'image' ? 'bg-black/90' : ''}`}
+          className={`flex flex-col items-center justify-center ${showBookCover ? 'gap-2': 'gap-10'} p-4 ${backgroundColor === 'image' ? 'bg-black/90 min-h-60' : ''}`}
         >
           <div
-            className={`flex md:flex-row flex-col items-center md:gap-10 gap-5 z-10`}
+            className={`flex md:flex-row flex-col items-center  md:gap-10 gap-5 z-10`}
           >
-            <img
-              src={bookCover || placeholderBookCover}
-              alt="Book Cover"
-              className="md:w-36 w-28 object-cover rounded mb-4"
-            />
-            <p className={`text-xs ${fontBold && 'font-bold'} ${fontItalic && 'italic'}`}>&quot;{quote || placeholderQuote}&quot;</p>
+            {showBookCover && (
+              <img
+                src={bookCover || placeholderBookCover}
+                alt="Book Cover"
+                className="md:w-36 w-28 object-cover rounded mb-4"
+              />
+            )}
+            <p
+              className={`text-xs text-center ${fontBold && 'font-bold'} ${fontItalic && 'italic'}`}
+            >
+              &quot;{quote || placeholderQuote}&quot;
+            </p>
           </div>
-          <div className="flex gap-1 font-bold justify-end w-full text-right z-10">
+          <div className="flex gap-1 font-bold justify-end w-full text-right text-xs z-10">
             <p>{book?.title || placeholderBookTitle}</p>,
             <p>
               {book?.authors ? book.authors.join(', ') : placeholderBookAuthor}

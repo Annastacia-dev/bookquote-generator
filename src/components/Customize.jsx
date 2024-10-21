@@ -13,6 +13,7 @@ const Customize = () => {
     fonts,
     setFont,
     setHoveredFont,
+    loadFont
   } = useContext(QuoteCardContext);
 
   return (
@@ -54,7 +55,8 @@ const Customize = () => {
             options={fonts}
             selectedOption={font}
             onSelect={setFont}
-            onHover={setHoveredFont} // Pass the hover function
+            onHover={setHoveredFont}
+            loadFont={loadFont}
           />
         </div>
       </div>

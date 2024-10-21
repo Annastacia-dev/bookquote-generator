@@ -2,7 +2,7 @@ import { useRef, useEffect, useState } from 'react';
 import { FaCaretDown, FaCaretUp } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 
-const CustomDropdown = ({ options, selectedOption, onSelect, onHover }) => {
+const CustomDropdown = ({ options, selectedOption, onSelect, onHover, loadFont }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -46,6 +46,7 @@ const CustomDropdown = ({ options, selectedOption, onSelect, onHover }) => {
                 key={index}
                 className="p-2 cursor-pointer hover:bg-gray-200 hover:text-black"
                 onMouseEnter={() => {
+                  loadFont(option)
                   onHover(option);
                 }}
                 onMouseLeave={() => onHover('')} // Reset hover on leave
@@ -66,6 +67,7 @@ CustomDropdown.propTypes = {
   selectedOption: PropTypes.string.isRequired,
   onSelect: PropTypes.func.isRequired,
   onHover: PropTypes.func.isRequired,
+  loadFont: PropTypes.func
 };
 
 export default CustomDropdown;

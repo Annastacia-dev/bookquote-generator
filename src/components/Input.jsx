@@ -1,10 +1,18 @@
 import { useContext } from 'react';
 import { QuoteContext } from '../context/Quote';
 
-
 const Input = () => {
-
-  const { setBook, setBookCover, bookAuthor, bookTitle, setShowCard, quote, setQuote, setBookTitle, setBookAuthor } = useContext(QuoteContext);
+  const {
+    setBook,
+    setBookCover,
+    bookAuthor,
+    bookTitle,
+    setShowCard,
+    quote,
+    setQuote,
+    setBookTitle,
+    setBookAuthor,
+  } = useContext(QuoteContext);
 
   const fetchBookCover = async (title, author) => {
     try {
@@ -33,45 +41,44 @@ const Input = () => {
     setShowCard(true);
 
     // Fetch book cover and details only if both title and author are provided
-    if (bookTitle ) {
+    if (bookTitle) {
       await fetchBookCover(bookTitle, bookAuthor);
     }
   };
 
   return (
-  
-      <form className="flex flex-col gap-4" onSubmit={handleGenerate}>
-        <textarea
-          className="bg-white/20 md:w-[40vw] h-40 rounded px-4 py-2 border border-white/10"
-          placeholder="Your book quote here"
-          value={quote}
-          onChange={(e) => setQuote(e.target.value)}
-          minLength={10}
-          maxLength={1000}
+    <form className="flex flex-col gap-4" onSubmit={handleGenerate}>
+      <textarea
+        className="bg-white/20 md:w-[40vw] h-40 rounded px-4 py-2 border border-white/10"
+        placeholder="Your book quote here"
+        value={quote}
+        onChange={(e) => setQuote(e.target.value)}
+        minLength={10}
+        maxLength={1000}
+        required
+      />
+      <div className="flex gap-1">
+        <input
+          className="bg-white/20 md:w-[20vw] w-full rounded px-4 py-2 border border-white/10"
+          placeholder="Book title"
+          value={bookTitle}
+          onChange={(e) => setBookTitle(e.target.value)}
           required
         />
-        <div className='flex gap-1'>
-          <input
-            className="bg-white/20 md:w-[20vw] w-full rounded px-4 py-2 border border-white/10"
-            placeholder="Book title"
-            value={bookTitle}
-            onChange={(e) => setBookTitle(e.target.value)}
-            required
-          />
-          <input
-            className="bg-white/20 md:w-[20vw] w-full rounded px-4 py-2 border border-white/10"
-            placeholder="Book author"
-            value={bookAuthor}
-            onChange={(e) => setBookAuthor(e.target.value)}
-          />
-        </div>
-        <button
-          className="bg-white mt-2 text-black md:w-[40vw] px-4 py-2 rounded font-semibold tracking-wider"
-          type="submit"
-        >
-          Generate
-        </button>
-      </form>
+        <input
+          className="bg-white/20 md:w-[20vw] w-full rounded px-4 py-2 border border-white/10"
+          placeholder="Book author"
+          value={bookAuthor}
+          onChange={(e) => setBookAuthor(e.target.value)}
+        />
+      </div>
+      <button
+        className="bg-white mt-2 text-black md:w-[40vw] px-4 py-2 rounded font-semibold tracking-wider"
+        type="submit"
+      >
+        Generate
+      </button>
+    </form>
   );
 };
 

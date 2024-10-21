@@ -9,7 +9,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <QuoteProvider>
       <QuoteCardProvider>
-       <App />
+        <App />
       </QuoteCardProvider>
     </QuoteProvider>
   </StrictMode>

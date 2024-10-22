@@ -1,6 +1,11 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect, createContext } from 'react';
 import axios from 'axios';
+import {
+  PiTextAlignLeftLight,
+  PiTextAlignRightLight,
+  PiTextAlignCenterThin,
+} from 'react-icons/pi';
 
 const QuoteCardContext = createContext();
 
@@ -12,13 +17,29 @@ const QuoteCardProvider = ({ children }) => {
     'bg-[#28292E] text-white',
   ];
 
+  const textAlignments = [
+    {
+      title: 'text-left',
+      icon: <PiTextAlignLeftLight />,
+    },
+    {
+      title: 'text-right',
+      icon: <PiTextAlignRightLight />,
+    },
+    {
+      title: 'text-center',
+      icon: <PiTextAlignCenterThin />,
+    },
+  ];
+
   const [backgroundColor, setBackgroundColor] = useState(backgroundColors[0]);
   const [fonts, setFonts] = useState([]);
   const [fontBold, setFontBold] = useState(false);
-  const [fontItalic, setFontItalic] = useState(true);
+  const [fontItalic, setFontItalic] = useState(false);
   const [font, setFont] = useState('Raleway');
   const [hoveredFont, setHoveredFont] = useState('');
   const [showBookCover, setShowBookCover] = useState(true);
+  const [textAlignment, setTextAlignment] = useState(textAlignments[0].title);
 
   const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
 
@@ -66,6 +87,9 @@ const QuoteCardProvider = ({ children }) => {
         loadFont,
         showBookCover,
         setShowBookCover,
+        textAlignment,
+        setTextAlignment,
+        textAlignments
       }}
     >
       {children}

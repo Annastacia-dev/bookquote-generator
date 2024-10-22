@@ -20,6 +20,9 @@ const Customize = () => {
     setFontItalic,
     showBookCover,
     setShowBookCover,
+    textAlignment,
+    setTextAlignment,
+    textAlignments
   } = useContext(QuoteCardContext);
 
   loadFont(font);
@@ -72,17 +75,34 @@ const Customize = () => {
           <h5 className="text-sm capitalize">font styles</h5>
           <div className="flex items-center gap-2" style={{ fontFamily: font }}>
             <button
-              className={`capitalize py-2 px-4 rounded ${backgroundColor}  ${fontBold && 'font-bold'}`}
+              className={`capitalize py-2 px-4 rounded font-bold ${backgroundColor}  ${fontBold && 'border-2 border-primary'}`}
               onClick={() => setFontBold(!fontBold)}
             >
               a
             </button>
             <button
-              className={`capitalize py-2 px-4  rounded ${backgroundColor} ${fontItalic && 'italic'}`}
+              className={`capitalize py-2 px-4 rounded italic ${backgroundColor} ${fontItalic && 'border-2 border-primary'}`}
               onClick={() => setFontItalic(!fontItalic)}
             >
               a
             </button>
+          </div>
+        </div>
+
+        {/* Text Alignments */}
+        <div className="flex flex-col gap-2 text-sm">
+          <h5 className="text-sm capitalize">text alignment</h5>
+          <div className="flex items-center gap-2" style={{ fontFamily: font }}>
+            {textAlignments.map((alignment, index) => (
+              <button
+                key={index}
+                className={`$capitalize text-lg py-2 px-4 rounded ${textAlignment === alignment.title ? 'border-2 border-primary' : ''}`}
+                onClick={() => setTextAlignment(alignment.title)}
+                title={alignment.title}
+              >
+                {alignment.icon}
+              </button>
+            ))}
           </div>
         </div>
 

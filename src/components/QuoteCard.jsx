@@ -25,6 +25,7 @@ const QuoteCard = () => {
     fontBold,
     fontItalic,
     showBookCover,
+    textAlignment
   } = useContext(QuoteCardContext);
   loadFont(font);
 
@@ -65,7 +66,7 @@ const QuoteCard = () => {
         }}
       >
         <div
-          className={`flex flex-col items-center justify-center ${showBookCover ? 'gap-2': 'gap-10'} p-4 ${backgroundColor === 'image' ? 'bg-black/70 min-h-60 min-w-[36rem]' : ''}`}
+          className={`flex flex-col items-center justify-center ${showBookCover ? 'gap-2' : 'gap-10'} p-4 ${backgroundColor === 'image' ? 'bg-black/70 min-h-60 min-w-[36rem]' : ''}`}
         >
           <div
             className={`flex md:flex-row flex-col items-center  md:gap-10 gap-5 z-10`}
@@ -78,7 +79,7 @@ const QuoteCard = () => {
               />
             )}
             <p
-              className={`text-xs text-center ${fontBold && 'font-bold'} ${fontItalic && 'italic'}`}
+              className={`text-xs ${textAlignment} whitespace-pre-wrap ${fontBold && 'font-bold'} ${fontItalic && 'italic'}`}
             >
               &quot;{quote || placeholderQuote}&quot;
             </p>

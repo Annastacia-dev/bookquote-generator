@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { QuoteContext } from '../context/Quote';
 
 const Input = () => {
@@ -34,20 +34,16 @@ const Input = () => {
     }
   };
 
-  const handleGenerate = async (event) => {
-    event.preventDefault(); // Prevent page refresh on form submission
-
-    // Always show the card (so the quote can update independently)
-    setShowCard(true);
-
-    // Fetch book cover and details only if both title and author are provided
+  useEffect(() => {
     if (bookTitle) {
-      await fetchBookCover(bookTitle, bookAuthor);
+      fetchBookCover(bookTitle, bookAuthor);
+      setShowCard(true); // Always show the card
     }
-  };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [bookTitle, bookAuthor]); // Dependency array to trigger on changes to title/author
 
   return (
-    <form className="flex flex-col gap-4" onSubmit={handleGenerate}>
+    <div className="flex flex-col gap-4">
       <textarea
         className="bg-white/20 md:w-[40vw] h-40 rounded px-4 py-2 border border-white/10"
         placeholder="Your book quote here"
@@ -72,13 +68,7 @@ const Input = () => {
           onChange={(e) => setBookAuthor(e.target.value)}
         />
       </div>
-      <button
-        className="bg-white mt-2 text-black md:w-[40vw] px-4 py-2 rounded font-semibold tracking-wider"
-        type="submit"
-      >
-        Generate
-      </button>
-    </form>
+    </div>
   );
 };
 

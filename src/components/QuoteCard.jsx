@@ -65,7 +65,7 @@ const QuoteCard = () => {
         }}
       >
         <div
-          className={`flex flex-col items-center justify-center ${showBookCover ? 'gap-2': 'gap-10'} p-4 ${backgroundColor === 'image' ? 'bg-black/90 min-h-60' : ''}`}
+          className={`flex flex-col items-center justify-center ${showBookCover ? 'gap-2': 'gap-10'} p-4 ${backgroundColor === 'image' ? 'bg-black/70 min-h-60 min-w-[36rem]' : ''}`}
         >
           <div
             className={`flex md:flex-row flex-col items-center  md:gap-10 gap-5 z-10`}

@@ -1,14 +1,14 @@
 import { FaWandMagicSparkles } from 'react-icons/fa6';
-import { useContext } from 'react';
+import { useState, useContext } from 'react';
 import { QuoteCardContext } from '../context/QuoteCard';
-import { FaImage } from 'react-icons/fa6';
 import CustomDropdown from './CustomDropdown';
+import { TbBackground } from 'react-icons/tb';
+import { FaCaretDown, FaCaretUp } from 'react-icons/fa';
+import Background from './Background';
+import TextAlignments from './TextAlignments';
 
 const Customize = () => {
   const {
-    backgroundColor,
-    backgroundColors,
-    setBackgroundColor,
     font,
     fonts,
     setFont,
@@ -21,11 +21,18 @@ const Customize = () => {
     showBookCover,
     setShowBookCover,
     textAlignment,
-    setTextAlignment,
-    textAlignments
   } = useContext(QuoteCardContext);
 
   loadFont(font);
+
+  const [showBackgroundPopup, setShowBackgroundPopUp] = useState(false);
+  const [showAlignmentPopup, setShowAlignmentPopUp] = useState(false);
+
+  const toggleShowBackgroundPopup = () =>
+    setShowBackgroundPopUp(!showBackgroundPopup);
+
+  const toggleShowAlignmentPopup = () =>
+    setShowAlignmentPopUp(!showAlignmentPopup);
 
   return (
     <div className="py-3 lg:mt-12">
@@ -35,88 +42,73 @@ const Customize = () => {
       </div>
       <hr className="mt-1 mb-4" />
 
-      <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-8 mt-6">
+      <div className="bg-white/10 flex items-center gap-4 px-2 flex-wrap">
         {/* Background */}
-        <div className="flex flex-col gap-2 text-sm">
-          <h5 className="text-sm capitalize">Background Color</h5>
-          <div className="flex items-center gap-2" style={{ fontFamily: font }}>
-            {backgroundColors.map((color, index) => (
-              <button
-                key={index}
-                className={`${color} capitalize py-2 px-4 rounded ${backgroundColor === color ? 'border-2 border-primary' : ''}`}
-                onClick={() => setBackgroundColor(color)}
-              >
-                a
-              </button>
-            ))}
-            <button
-              className={`capitalize py-2 px-4 text-lg rounded ${backgroundColor === 'image' ? 'border-2 border-primary' : ''}`}
-              onClick={() => setBackgroundColor('image')}
-            >
-              <FaImage />
-            </button>
-          </div>
-        </div>
-
-        {/* Font */}
-        <div className="flex flex-col gap-2 text-sm">
-          <h5 className="text-sm capitalize">Font</h5>
-          <CustomDropdown
-            options={fonts}
-            selectedOption={font}
-            onSelect={setFont}
-            onHover={setHoveredFont}
-            loadFont={loadFont}
-          />
-        </div>
-
-        {/* Font Styles */}
-        <div className="flex flex-col gap-2 text-sm">
-          <h5 className="text-sm capitalize">font styles</h5>
-          <div className="flex items-center gap-2" style={{ fontFamily: font }}>
-            <button
-              className={`capitalize py-2 px-4 rounded font-bold ${backgroundColor}  ${fontBold && 'border-2 border-primary'}`}
-              onClick={() => setFontBold(!fontBold)}
-            >
-              a
-            </button>
-            <button
-              className={`capitalize py-2 px-4 rounded italic ${backgroundColor} ${fontItalic && 'border-2 border-primary'}`}
-              onClick={() => setFontItalic(!fontItalic)}
-            >
-              a
-            </button>
-          </div>
-        </div>
-
-        {/* Text Alignments */}
-        <div className="flex flex-col gap-2 text-sm">
-          <h5 className="text-sm capitalize">text alignment</h5>
-          <div className="flex items-center gap-2" style={{ fontFamily: font }}>
-            {textAlignments.map((alignment, index) => (
-              <button
-                key={index}
-                className={`$capitalize text-lg py-2 px-4 rounded ${textAlignment === alignment.title ? 'border-2 border-primary' : ''}`}
-                onClick={() => setTextAlignment(alignment.title)}
-                title={alignment.title}
-              >
-                {alignment.icon}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Book Cover */}
-        <div className="flex items-center mb-4">
-          <label className="mr-2 text-sm">Show Book Cover:</label>
+        <div className="relative" title="Background">
           <div
-            className={`relative inline-flex items-center cursor-pointer ${showBookCover ? 'bg-primary' : 'bg-gray-400'} rounded-full w-12 h-6`}
-            onClick={() => setShowBookCover(!showBookCover)}
+            className="flex items-center gap-2 cursor-pointer"
+            onClick={toggleShowBackgroundPopup}
           >
-            <span
-              className={`absolute left-0 w-6 h-6 bg-white rounded-full transition-transform duration-200 ${showBookCover ? 'transform translate-x-6' : ''}`}
-            ></span>
+            <TbBackground className="text-xl" />
+            {showBackgroundPopup ? <FaCaretUp /> : <FaCaretDown />}
           </div>
+          {showBackgroundPopup && (
+            <Background setShowBackgroundPopUp={setShowBackgroundPopUp} />
+          )}
+        </div>
+        <div className="bg-black/20 w-1 h-10"></div>
+        {/* Font */}
+        <CustomDropdown
+          options={fonts}
+          selectedOption={font}
+          onSelect={setFont}
+          onHover={setHoveredFont}
+          loadFont={loadFont}
+        />
+        <div className="bg-black/20 w-1 h-10"></div>
+        {/* Font Styles */}
+        <div className="flex items-center gap-2" title="Font Styles">
+          <button
+            className={`capitalize px-4 py-2 font-bold ${fontBold && 'bg-black/40'}`}
+            onClick={() => setFontBold(!fontBold)}
+            title="Bold"
+          >
+            b
+          </button>
+          <button
+            className={`capitalize py-2 px-4 italic ${fontItalic && 'bg-black/40'}`}
+            onClick={() => setFontItalic(!fontItalic)}
+            title="Italic"
+          >
+            i
+          </button>
+        </div>
+        <div className="bg-black/20 w-1 h-10"></div>
+        {/* Text Alignments */}
+        <div className="relative" title="Text Alignments">
+          <div
+            className="flex items-center gap-2 cursor-pointer text-xl"
+            onClick={toggleShowAlignmentPopup}
+          >
+            {textAlignment.icon}
+            {showAlignmentPopup ? (
+              <FaCaretUp className="text-sm" />
+            ) : (
+              <FaCaretDown className="text-sm" />
+            )}
+          </div>
+          {showAlignmentPopup && <TextAlignments setShowAlignmentPopUp={setShowAlignmentPopUp} />}
+        </div>
+        <div className="bg-black/20 w-1 h-10"></div>
+        {/* Book Cover */}
+        <div
+          className={`relative inline-flex items-center cursor-pointer ${showBookCover ? 'bg-primary' : 'bg-gray-400'} rounded-full w-12 h-6`}
+          onClick={() => setShowBookCover(!showBookCover)}
+          title="Book Cover"
+        >
+          <span
+            className={`absolute left-0 w-6 h-6 bg-white rounded-full transition-transform duration-200 ${showBookCover ? 'transform translate-x-6' : ''}`}
+          ></span>
         </div>
       </div>
     </div>

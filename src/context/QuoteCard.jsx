@@ -39,7 +39,7 @@ const QuoteCardProvider = ({ children }) => {
   const [font, setFont] = useState('Raleway');
   const [hoveredFont, setHoveredFont] = useState('');
   const [showBookCover, setShowBookCover] = useState(true);
-  const [textAlignment, setTextAlignment] = useState(textAlignments[0].title);
+  const [textAlignment, setTextAlignment] = useState(textAlignments[0]);
 
   const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
 
@@ -89,7 +89,7 @@ const QuoteCardProvider = ({ children }) => {
         setShowBookCover,
         textAlignment,
         setTextAlignment,
-        textAlignments
+        textAlignments,
       }}
     >
       {children}

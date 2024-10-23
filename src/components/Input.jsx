@@ -39,7 +39,7 @@ const Input = () => {
       fetchBookCover(bookTitle, bookAuthor);
       setShowCard(true); // Always show the card
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bookTitle, bookAuthor]); // Dependency array to trigger on changes to title/author
 
   return (

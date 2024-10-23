@@ -35,9 +35,9 @@ const CustomDropdown = ({
   }, []);
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className="relative" ref={dropdownRef} title="Font">
       <button
-        className="border border-white/10 p-2 rounded bg-[#28292E] md:min-w-48 w-full text-left flex items-center justify-between"
+        className="md:min-w-20 text-sm text-left flex items-center justify-between"
         onClick={toggleDropdown}
         style={{ fontFamily: selectedOption }}
       >
@@ -45,7 +45,7 @@ const CustomDropdown = ({
         {isOpen ? <FaCaretUp /> : <FaCaretDown />}
       </button>
       {isOpen && (
-        <div className="absolute left-0 right-0 mt-1 bg-gray-300 text-black rounded shadow-lg z-10 overflow-y-scroll h-96 bottom-12 p-2">
+        <div className="absolute left-0 right-0 mt-1 bg-gray-300 text-black rounded shadow-lg z-10 overflow-y-scroll h-96 bottom-12 p-2 min-w-60">
           {options.map((option, index) => {
             return (
               <div

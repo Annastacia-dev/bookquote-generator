@@ -97,7 +97,9 @@ const Customize = () => {
               <FaCaretDown className="text-sm" />
             )}
           </div>
-          {showAlignmentPopup && <TextAlignments setShowAlignmentPopUp={setShowAlignmentPopUp} />}
+          {showAlignmentPopup && (
+            <TextAlignments setShowAlignmentPopUp={setShowAlignmentPopUp} />
+          )}
         </div>
         <div className="bg-black/20 w-1 h-10"></div>
         {/* Book Cover */}

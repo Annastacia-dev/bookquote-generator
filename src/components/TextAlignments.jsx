@@ -2,17 +2,14 @@ import { useContext, useRef, useEffect } from 'react';
 import { QuoteCardContext } from '../context/QuoteCard';
 import PropTypes from 'prop-types';
 
-const TextAlignments = ({setShowAlignmentPopUp}) => {
+const TextAlignments = ({ setShowAlignmentPopUp }) => {
   const { font, textAlignment, setTextAlignment, textAlignments } =
     useContext(QuoteCardContext);
 
   const alignmentRef = useRef(null);
 
   const handleClickOutside = (event) => {
-    if (
-      alignmentRef.current &&
-      !alignmentRef.current.contains(event.target)
-    ) {
+    if (alignmentRef.current && !alignmentRef.current.contains(event.target)) {
       setShowAlignmentPopUp(false);
     }
   };
@@ -25,7 +22,10 @@ const TextAlignments = ({setShowAlignmentPopUp}) => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-2 absolute bg-white/20 p-2 rounded top-9" ref={alignmentRef}>
+    <div
+      className="flex flex-col gap-2 absolute bg-white/20 p-2 rounded top-9"
+      ref={alignmentRef}
+    >
       <div className="flex items-center gap-2" style={{ fontFamily: font }}>
         {textAlignments.map((alignment, index) => (
           <button
@@ -43,7 +43,7 @@ const TextAlignments = ({setShowAlignmentPopUp}) => {
 };
 
 TextAlignments.propTypes = {
-  setShowAlignmentPopUp: PropTypes.func.isRequired
-}
+  setShowAlignmentPopUp: PropTypes.func.isRequired,
+};
 
 export default TextAlignments;
